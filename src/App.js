@@ -5,12 +5,12 @@ const App = () => {
   const [data, setData] = useState(null);
   const onClick = async () => {
     try {
-      await axios
-        .get("https://jsonplaceholder.typicode.com/todos/1")
-        .then((res) => {
-          setData(res.data);
-        });
+      const response = await axios.get(
+        `https://newsapi.org/v2/top-headlines?country=kr&apiKey=5fa74aa5d2304da9a141fee265c9c6e5`
+      );
+      setData(response.data);
     } catch (e) {
+      console.log(e);
       throw e;
     }
   };
@@ -21,7 +21,8 @@ const App = () => {
       </div>
       {data && (
         <textarea
-          rows={7}
+          rows={150}
+          cols={150}
           value={JSON.stringify(data, null, 2)}
           readOnly={true}
         />
